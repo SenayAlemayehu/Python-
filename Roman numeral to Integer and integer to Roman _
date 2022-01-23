@@ -1,0 +1,46 @@
+from unittest import result
+
+
+def romanConvert():
+    entryUpper = input("Enter a valid Roman Number or an Integer: ")
+    
+
+        
+    print(f"You have entered {entryUpper}")
+    
+    try: 
+      result = intToRoman(int(entryUpper))
+      print(f"Converted value is: {result}")
+    except ValueError:
+      result = romanToInt(entryUpper.upper())
+      print(f"Converted value is: {result}")
+    
+      
+
+
+def intToRoman(num: int) -> str:
+    romanNum = {1000: 'M', 900: 'CM', 500: 'D', 400: 'CD', 100: 'C', 90: 'XC', 50: 'L', 40: 'XL', 10: 'X', 9: 'IX', 5: 'V', 4: 'IV', 1: 'I'}
+
+    result = ""
+    for i in romanNum:
+      result += (num//i) * romanNum[i] 
+      num %= i
+    return result
+
+
+
+def romanToInt(rom: str) -> int:
+    romanNum = {"I": 1, "V": 5, "X": 10,
+                "L": 50, "C": 100, "D": 500, "M": 1000}
+    result = 0
+    for r in range(len(rom)-1):
+        if romanNum[rom[r]] < romanNum[rom[r+1]]:
+            result -= romanNum[rom[r]]
+        else:
+            result += romanNum[rom[r]]
+    result += romanNum[rom[-1]]
+    return result
+
+
+romanConvert()
+
