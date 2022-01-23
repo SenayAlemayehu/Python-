@@ -1,3 +1,4 @@
+from distutils.log import error
 from unittest import result
 
 
@@ -15,6 +16,7 @@ def romanConvert():
       result = romanToInt(entryUpper.upper())
       print(f"Converted value is: {result}")
     
+  
       
 
 
@@ -33,14 +35,15 @@ def romanToInt(rom: str) -> int:
     romanNum = {"I": 1, "V": 5, "X": 10,
                 "L": 50, "C": 100, "D": 500, "M": 1000}
     result = 0
-    for r in range(len(rom)-1):
-        if romanNum[rom[r]] < romanNum[rom[r+1]]:
-            result -= romanNum[rom[r]]
-        else:
-            result += romanNum[rom[r]]
-    result += romanNum[rom[-1]]
-    return result
-
+    try:
+        for r in range(len(rom)-1):
+            if romanNum[rom[r]] < romanNum[rom[r+1]]:
+                result -= romanNum[rom[r]]
+            else:
+                result += romanNum[rom[r]]
+        result += romanNum[rom[-1]]
+        return result
+    except:
+      print("Please enter a valid Roman numeral")
 
 romanConvert()
-
